@@ -15,6 +15,8 @@
   file: path={{mountDir}} state=directory
 - name: Create tftpd directory
   file: path={{tftpdDir}} state=directory
+- name: Create file for Boot(EFI)
+  copy: src=elilo-3.16-x86_64.efi dest={{tftpdDir}}/elilo-3.16-x86_64.efi mode=0644
 - name: Create Directory for Boot
   file: path={{tftpdDir}}/pxelinux.cfg state=directory
 - name: Create pxeboot Config

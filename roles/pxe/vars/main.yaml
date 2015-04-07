@@ -4,4 +4,5 @@ mountDir: /mnt/linux
 tftpdDir: /var/lib/tftpboot
 dhcpStart: 192.168.10.193
 dhcpEnd: 192.168.10.223
-dhcpBoot: pxelinux.0
+#dhcpBoot: pxelinux.0
+dhcpBoot: elilo-3.16-x86_64.efi
