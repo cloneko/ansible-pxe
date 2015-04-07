@@ -1,0 +1,4 @@
+workDir: /opt/pxe/
+isofile: ubuntu-14.04.2-server-amd64.iso 
+mountDir: /mnt/linux
+tftpdDir: /var/lib/tftpboot

@@ -1,0 +1,4 @@
+image=vmlinuz
+label=LINUX
+initrd=initrd.img
+append="boot=live live-config live-media-path=/live netboot=nfs nfsroot={{ ansible_eth0.ipv4.address }}:{{mountDir}}"

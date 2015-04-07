@@ -1,0 +1,6 @@
+---
+- hosts: all
+  user: install
+  sudo: yes
+  roles:
+    - pxe

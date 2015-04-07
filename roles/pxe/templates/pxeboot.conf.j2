@@ -1,0 +1,5 @@
+default LINUX
+
+LABEL LINUX
+    KERNEL /live/vmlinuz
+    APPEND initrd=/live/initrd.img vga=791 boot=live config live-media-path=/live netboot=nfs nfsroot={{ ansible_eth0.ipv4.address }}:{{mountDir}}

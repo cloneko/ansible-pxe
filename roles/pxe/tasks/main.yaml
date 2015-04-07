@@ -1,0 +1,32 @@
+- name: Install Software
+  apt: name={{item}} state=present
+  with_items:
+    - nfs-kernel-server
+    - tftpd-hpa
+    - syslinux
+    - dnsmasq
+- name: Create pxe directory
+  file: path={{workDir}}/ state=directory mode=0755
+- name: Upload Ubuntu ISO
+  copy: src=/pxe/files/{{isofile}} dest={{workDir}}/{{isofile}} state=file
+- name: Upload /etc/exports
+  copy: src=/pxe/files/exports dest=/etc/exports state=file
+- name: Create mount point
+  file: path={{mountDir}} state=directory
+- name: Create tftpd directory
+  file: path={{tftpdDir}} state=directory
+- name: Create Directory for Boot
+  file: path={{tftpdDir}}/pxelinux.cfg state=directory
+- name: Create pxeboot Config
+  template: src=/pxe/template/pxeboot.conf.j2 dest={{tftpdDir}}/pxelinux.cfg/default mode=0640
+- name: Setup /etc/dnsmasq.conf
+  template: src=/pxe/templates/dnsmasq.conf.j2 dest=/etc/dnsmasq.conf mode=0600 owner=root group=root
+- name: Mount ISO file
+  mount: name={{mountDir}} src={{workDir}}/{{isofile}} fstype=iso9660 opts=loop state=present
+- name: Link Live-boot Directory and file
+  file: src={{mountDir}}/live path={{tftpdDir}}/live state=link 
+  file: src={{tftpdDir}}/live/vmlinuz path={{tftpdDir}}/vmlinuz state=link
+  file: src={{tftpdDir}}/live/initrd.img path={{tftpdDir}}/initrd.img state=link
+- name: Start Services
+  service: name=dnsmasq enabled=yes state=started
+  service: name=nfs-kernel-server enabled=yes state=started
