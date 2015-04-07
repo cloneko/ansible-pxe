@@ -1,4 +1,7 @@
 workDir: /opt/pxe/
-isofile: ubuntu-14.04.2-server-amd64.iso 
+isofile: ubuntu-14.04.2-desktop-amd64.iso 
 mountDir: /mnt/linux
 tftpdDir: /var/lib/tftpboot
+dhcpStart: 192.168.10.193
+dhcpEnd: 192.168.10.223
+dhcpBoot: pxelinux.0

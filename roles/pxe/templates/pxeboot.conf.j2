@@ -1,5 +1,6 @@
 default LINUX
 
 LABEL LINUX
-    KERNEL /live/vmlinuz
-    APPEND initrd=/live/initrd.img vga=791 boot=live config live-media-path=/live netboot=nfs nfsroot={{ ansible_eth0.ipv4.address }}:{{mountDir}}
+	MENU LABEL Install Ubuntu 14.04(64bit)
+    KERNEL /vmlinuz.efi
+    APPEND initrd=/initrd.lz vga=normal boot=casper rootfstype=nfs netboot=nfs nfsroot={{ ansible_eth0.ipv4.address }}:{{mountDir}}
